@@ -31,26 +31,51 @@ class EmployeePayrollData{
              this._salary = salary;
          }
     
-         get startDate() {return this._startDate;}
-         set startDate(startDate){
-              this._startDate = startDate;
-            }
-    
          get notes() {return this._notes}
          set notes(notes){
              this._notes = notes;
          }
+         get startDate() {return this._startDate;}
+        //  set startDate(startDate){
+        //     let now= new Date();
+        //       if (startDate > now) throw 'start date is future date!';
+        //       var diff =Math.abs(now.getTime() - startDate.getTime());
+        //       if (diff / (1000*60*60*24) > 30)
+        //             throw 'start date is beyond 30 Days!';
+        //       this._startDate = startDate;
+        //     }
+        set startDate(startDate) {
+            let datePassed = new Date(startDate);
+            let now = new Date();
+            if (now > datePassed) {
+                this._startDate = startDate;
+            } else throw "Start Date is Future Date!";
+        }  
     
          //toString method
          toString(){
 
-            const options={year:'numeric', month:'long', day:'numeric'};
-            const empDate= !this.startDate ? "undefined" :
-                         this.startDate.toLocaleDateString("en-US", options);
+        //const options={year:"numeric", month:"long", day:"numeric"};
+        //const empDate= !this.startDate ? "undefined" : this.startDate.toLocaleDateString("en-GB", options);
             
-                         return "id="+this.id+" : name="+this.name+
-                     " : gender="+this.gender +" : profilePic =" +this.profilePic +" : Dept="+this.department+
-                     " : salary="+this.salary+" : Start Date="+empDate+
-                     " : Notes="+this.notes;
+                         return (
+                        "id=" +
+                         this.id +
+                         " : name=" +
+                         this.name +
+                         " : profilePic =" +
+                         this.profilePic +
+                         " : gender="+
+                         this.gender +
+                         " : Dept="+
+                         this.department +
+                         " : salary=" +
+                         this.salary +
+                         " : Notes="+
+                        this.notes +
+                        " : StartDate=" +
+                        this.startDate 
+                        //empDate
+                        );                        
          }
-     }
+}
